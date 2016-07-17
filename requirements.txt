@@ -1,0 +1,6 @@
+Pillow==3.3.0
+py-enigma==0.1
+py-enigma-operator==0.6
+pytz==2016.6.1
+requests==2.10.0
+tzlocal==1.2.2
