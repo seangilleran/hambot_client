@@ -4,8 +4,6 @@ from datetime import datetime
 
 import pytz
 from tzlocal import get_localzone
-import PIL
-
 
 class Image():
 
@@ -62,20 +60,22 @@ class Image():
         Webcam images tend to be rather dark--this lightens them up.
         Also, it flips it around to match the orientation of the camera.
         """
+        from PIL import Image as Img  # Prevent conflict.
+        from PIL import ImageEnhance
 
-        img = PIL.Image.open(self.path)
-        enh = PIL.ImageEnhance.Brightness(img)
+        img = Img.open(self.path)
+        enh = ImageEnhance.Brightness(img)
         enh.enhance(brightness)
 
         # We only want specific values for rotation.
         assert (rotation == 0 or rotation == 90 or
                 rotation == 180 or rotation == 270)
         if rotation == 90:
-            img = img.transpose(PIL.Image.ROTATE_90)
+            img = img.transpose(Img.ROTATE_90)
         elif rotation == 180:
-            img = img.transpose(PIL.Image.ROTATE_180)
+            img = img.transpose(Img.ROTATE_180)
         if rotation == 270:
-            img = img.transpose(PIL.Image.ROTATE_270)
+            img = img.transpose(Img.ROTATE_270)
 
         img.save(self.path)
 

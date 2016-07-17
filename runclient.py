@@ -40,15 +40,14 @@ logging.basicConfig(
 logging.getLogger('').addHandler(logging.StreamHandler())
 logging.debug('Hambot configured and operational!')
 
-# Test...
+###
 
 hb = Hambot(API_URL, KEY_PATH)
-#Image.dir = IMAGE_PATH
-#img = Image('test.jpg')
-#hb.upload_image(img, TOKEN)
-t = Temperature.get_from_api(
-    city_id=5807540,
-    api_key='1f84be090cc3946f58f2f3758a3420df'
-)
 
-hb.upload_temperature(t, TOKEN)
+Image.dir = IMAGE_PATH
+img = Image.from_usb_camera()
+img.fix(rotation=90)
+hb.upload_image(img, TOKEN)
+
+t = Temperature.get_from_sensor()
+hb.upload_temperature(t, token)
